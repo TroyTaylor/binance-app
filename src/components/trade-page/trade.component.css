@@ -1,0 +1,53 @@
+.field {
+    float: left;
+    width: 25%;
+    border: solid 1px black;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+.priceButtons {
+    margin-bottom: 10px;
+}
+
+.cell {
+    float: left;
+}
+
+.selected {
+    font-weight: bold;
+}
+
+.priceRow {
+    cursor: pointer;
+}
+
+.priceRow .cell {
+    width: 50%;
+}
+
+.field.bookTickers {
+    width: 33%;
+}
+
+.bookTickerRow {
+    font-size: 12px;
+}
+
+.bookTickerRow .cell {
+    width: 20%;
+}
+
+.field.depth {
+    width: 30%;
+}
+
+.subField {
+    float: left;
+    width: 45%;
+    margin-right: 10px;
+}
+
+.depth p {
+    margin-top: 0;
+}

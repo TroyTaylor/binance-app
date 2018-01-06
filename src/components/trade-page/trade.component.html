@@ -1,0 +1,52 @@
+<section>
+    <div>
+        <h3>Trade</h3>
+        <div *ngIf="filteredPriceKeys !== undefined" class="field prices">
+            <div class="priceButtons">
+                <button (click)="filterPrices('BTC')">BTC</button>
+                <button (click)="filterPrices('ETH')">ETH</button>
+                <button (click)="filterPrices('BNB')">BNB</button>
+                <button (click)="filterPrices('USDT')">USDT</button>
+            </div>
+            <div class="priceRow {{price === ticketChoice ? 'selected' : ''}}" *ngFor="let price of filteredPriceKeys" (click)="chooseDepth(price)">
+                <div class="cell">
+                    <span>{{price}}:</span>
+                </div>
+                <div class="cell">
+                    <span>{{prices[price]}}</span>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="bookTickerKeys !== undefined" class="field bookTickers">
+            <div class="bookTickerRow">
+                <div class="cell">Pair:</div>
+                <div class="cell">Ask</div>
+                <div class="cell">No. of Asks</div>
+                <div class="cell">Bid</div>
+                <div class="cell">No. of Bids</div>
+            </div>
+            <div class="bookTickerRow" *ngFor="let bookTicker of bookTickerKeys">
+                <div class="cell">{{bookTicker}}:</div>
+                <div class="cell">{{bookTickers[bookTicker].ask}}</div>
+                <div class="cell">{{bookTickers[bookTicker].asks}}</div>
+                <div class="cell">{{bookTickers[bookTicker].bid}}</div>
+                <div class="cell">{{bookTickers[bookTicker].bids}}</div>
+            </div>
+        </div>
+        <div *ngIf="ticketChoice !== ''" class="field depth">
+            <p>{{ticketChoice}}</p>
+            <div *ngIf="depthAsks !== undefined" class="subField depthAsks">
+                <div>Asks</div>
+                <div *ngFor="let depthAsk of depthAsksKeys">
+                    {{depthAsk}}: {{depthAsks[depthAsk]}}
+                </div>
+            </div>
+            <div *ngIf="depthBids !== undefined" class="subField depthBids">
+                <div>Bids</div>
+                <div *ngFor="let depthBid of depthBidsKeys">
+                    {{depthBid}}: {{depthBids[depthBid]}}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
