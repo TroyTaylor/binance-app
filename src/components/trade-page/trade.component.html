@@ -3,10 +3,10 @@
         <h3>Trade</h3>
         <div *ngIf="filteredPriceKeys !== undefined" class="field prices">
             <div class="priceButtons">
-                <button (click)="filterPrices('BTC')">BTC</button>
-                <button (click)="filterPrices('ETH')">ETH</button>
-                <button (click)="filterPrices('BNB')">BNB</button>
-                <button (click)="filterPrices('USDT')">USDT</button>
+                <button [class.selected]="priceFilter === 'BTC'" (click)="filterPrices('BTC')">BTC</button>
+                <button [class.selected]="priceFilter === 'ETH'" (click)="filterPrices('ETH')">ETH</button>
+                <button [class.selected]="priceFilter === 'BNB'" (click)="filterPrices('BNB')">BNB</button>
+                <button [class.selected]="priceFilter === 'USDT'" (click)="filterPrices('USDT')">USDT</button>
             </div>
             <div class="priceRow {{price === ticketChoice ? 'selected' : ''}}" *ngFor="let price of filteredPriceKeys" (click)="chooseDepth(price)">
                 <div class="cell">
@@ -36,15 +36,34 @@
         <div *ngIf="ticketChoice !== ''" class="field depth">
             <p>{{ticketChoice}}</p>
             <div *ngIf="depthAsks !== undefined" class="subField depthAsks">
-                <div>Asks</div>
+                <div class="title">Asks</div>
                 <div *ngFor="let depthAsk of depthAsksKeys">
                     {{depthAsk}}: {{depthAsks[depthAsk]}}
                 </div>
             </div>
             <div *ngIf="depthBids !== undefined" class="subField depthBids">
-                <div>Bids</div>
+                <div class="title">Bids</div>
                 <div *ngFor="let depthBid of depthBidsKeys">
                     {{depthBid}}: {{depthBids[depthBid]}}
+                </div>
+            </div>
+        </div>
+        <div *ngIf="currentCandlesticks !== undefined" class="field candlesticks">
+            <div class="priceButtons">
+                <button [class.selected]="candlestickTime === '1m'" (click)="setCandleRange('1m')">1m</button>
+                <button [class.selected]="candlestickTime === '3m'" (click)="setCandleRange('3m')">3m</button>
+                <button [class.selected]="candlestickTime === '5m'" (click)="setCandleRange('5m')">5m</button>
+                <button [class.selected]="candlestickTime === '15m'" (click)="setCandleRange('15m')">15m</button>
+            </div>
+            <div class="candlesticksRow {{stick[1] > stick[4] ? 'fall' : 'rise'}}" *ngFor="let stick of currentCandlesticks">
+                <div class="cell">
+                    Time: {{stick.time}}
+                </div>
+                <div class="cell">
+                    Open: {{stick[1]}}
+                </div>
+                <div class="cell">
+                    Close: {{stick[4]}}
                 </div>
             </div>
         </div>

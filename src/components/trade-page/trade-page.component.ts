@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ChartModule } from 'angular2-highcharts';
 import {Observable} from 'rxjs/Rx';
 
 @Component({
@@ -9,6 +10,7 @@ import {Observable} from 'rxjs/Rx';
 
 export class TradePageComponent  {
     binance = require('node-binance-api');
+    moment = require('moment');
 
     prices = {};
     priceKeys: string[];
@@ -26,6 +28,34 @@ export class TradePageComponent  {
 
     depthBids = {};
     depthBidsKeys: string[];
+
+    candlestickTime = '1m';
+    currentCandlesticks: any[];
+    chartOptions = {
+        title: { text: 'CandleSticks' },
+        rangeSelector: {
+            selected: 1
+        },
+        series: [{
+            type: 'candlestick',
+            name: 'CandleSticks',
+            data: {},
+            dataGrouping: {
+                units: [
+                    [
+                        'week', // unit name
+                        [1] // allowed multiples
+                    ], [
+                        'month',
+                        [1, 2, 3, 4, 6]
+                    ]
+                ]
+            },
+            tooltip: {
+                valueDecimals: 2
+            }
+        }]
+    }
 
     constructor(
         //private _api: APIService,
@@ -54,12 +84,37 @@ export class TradePageComponent  {
         });
     }
 
+    setCandleRange(value: string): void {
+        this.candlestickTime = value;
+        this.currentCandlesticks = [];
+        this.getCandlesticks(this);
+    }
+
+    getCandlesticks(that: any): void {
+        this.binance.candlesticks(this.ticketChoice, this.candlestickTime, function(ticks: any, symbol: any) {
+            let chartData = new Array();
+            //time, open, high, low, close, volume, closeTime, assetVolume, trades, buyBaseVolume, buyAssetVolume, ignored
+            that.currentCandlesticks = ticks.slice(Math.max(ticks.length - 10, 1));
+            for (let i of that.currentCandlesticks) {
+                const nextData = i.slice(0, 5);
+                //console.log(nextData);
+                chartData.push(nextData);
+                const time = new Date(i[0]);
+                i.time = that.moment(time).format('YYYY-MM-DD h:mm a');
+            }
+            that.chartOptions.series.data = chartData;
+        });
+    }
+
     chooseDepth(value: string): void {
+        const that = this;
         this.ticketChoice = value;
         this.depthAsks = {};
         this.depthAsksKeys = [];
         this.depthBids = {};
         this.depthBidsKeys = [];
+        this.currentCandlesticks = [];
+        this.getCandlesticks(this);
     }
 
     getDepth(that: any): void {
@@ -69,7 +124,6 @@ export class TradePageComponent  {
                 that.depthAsksKeys = Object.keys(that.depthAsks);
                 that.depthBids = depth.bids;
                 that.depthBidsKeys = Object.keys(that.depthBids);
-                //console.log(that.depthBids);
             });
         }
     }

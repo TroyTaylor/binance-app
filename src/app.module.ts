@@ -6,6 +6,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 //import './rxjs-extensions';
 
+import { ChartModule } from 'angular2-highcharts';
+
 import { AppComponent } from './app.component';
 
 import { APP_CONFIG, TagVal_AppConfig } from './app.config';
@@ -20,6 +22,7 @@ import { TradePageComponent } from './components/trade-page/trade-page.component
         FormsModule,
         HttpModule,
         HttpClientModule,
+        ChartModule.forRoot(require('highcharts')),
         JsonpModule,
     ],
     declarations: [
