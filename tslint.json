@@ -1,0 +1,36 @@
+{
+  "extends": "tslint:recommended",
+  "rules": {
+    "max-line-length": [
+      true,
+      140
+    ],
+    "member-access": false,
+    "member-ordering": [
+      true,
+      "static-before-instance",
+      "variables-before-functions"
+    ],
+    "no-console": [
+      true,
+      "debug",
+      "info",
+      "time",
+      "timeEnd",
+      "trace"
+    ],
+    "no-duplicate-variable": true,
+    "no-empty": false,
+    "no-inferrable-types": true,
+    "no-string-literal": false,
+    "no-switch-case-fall-through": true,
+    "object-literal-key-quotes": false,
+    "object-literal-sort-keys": false,
+    "ordered-imports": false,
+    "quotemark": [
+      true,
+      "single"
+    ],
+    "variable-name": false
+  }
+}
