@@ -22,7 +22,7 @@ import { TradePageComponent } from './components/trade-page/trade-page.component
         FormsModule,
         HttpModule,
         HttpClientModule,
-        ChartModule.forRoot(require('highcharts')),
+        //ChartModule.forRoot(require('highcharts')),
         JsonpModule,
     ],
     declarations: [
