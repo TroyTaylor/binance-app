@@ -132,8 +132,8 @@ export class TradePageComponent  {
         const that = this;
         let timer = Observable.timer(1000, 1000);
         this.binance.options = {
-            'APIKEY': 'vvn2poZ3fa1tZ3nrZJvwfxXHcryW4P6hIckUj4b7jgHbK30RsbpRazcW9hMJIRxl',
-            'APISECRET': 'nkVCBRUlrbS2KhHiCs2j5OYekRYrCwOBVphrozQ7Nid63NWrNM0UOqnHNTjTfSXC'
+            'APIKEY': '<Key here>',
+            'APISECRET': '<Secret Key>'
         };
         timer.subscribe((response) => {
             this.getPrices(this);
