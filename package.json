@@ -34,7 +34,7 @@
     "angular2-highcharts": "^0.5.5",
     "angular2-template-loader": "^0.6.2",
     "awesome-typescript-loader": "^3.4.1",
-    "highcharts": "^6.0.4",
+    "highcharts": "^9.0.0",
     "json-loader": "^0.5.7",
     "moment": "^2.20.1",
     "node-binance-api": "^0.3.0",
